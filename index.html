@@ -60,9 +60,9 @@
                 <div className="content">
                     <div className="line"></div>
                 {/* Timeline item */}
-                {activities.map((activity) => {
-                    return <ActivityItem activity={activity} />
-                })}
+                {activities.map((activity) => (
+                    <ActivityItem activity={activity} />
+                ))}
                 </div>
             )
         }
