@@ -10,19 +10,19 @@
     <script src="http://cdn.bootcss.com/react/15.6.1/react-dom.min.js"></script>
     <script src="http://cdn.bootcss.com/babel-core/5.8.38/browser.min.js"></script>
 <body>
-    <div id="app"></div>
+<div id="app"></div>
 </body>
 <script type="text/babel">
 
     class App extends React.Component {
         render() {
             return (
-                <div className="notificationsFrame">
-                    <div className="panel">
-                        <Header title="Timeline" />
-                        <Content activities={activities} />
+                    <div className="notificationsFrame">
+                        <div className="panel">
+                            <Header title="Timeline"/>
+                            <Content activities={activities}/>
+                        </div>
                     </div>
-                </div>
             )
         }
     }
@@ -30,24 +30,24 @@
     class Header extends React.Component {
         render() {
             return (
-                <div className="header">
-                    <div className="menuIcon">
-                        <div className="dashTop"></div>
-                        <div className="dashBottom"></div>
-                        <div className="circle"></div>
-                    </div>
-                
-                    <span className="title">
+                    <div className="header">
+                        <div className="menuIcon">
+                            <div className="dashTop"></div>
+                            <div className="dashBottom"></div>
+                            <div className="circle"></div>
+                        </div>
+
+                        <span className="title">
                         {this.props.title}
                     </span>
 
-                    <input
-                        type="text"
-                        className="searchInput"
-                        placeholder="Search ..." />
-                    
-                    <div className="fa fa-search searchIcon"></div>
-                </div>
+                        <input
+                                type="text"
+                                className="searchInput"
+                                placeholder="Search ..."/>
+
+                        <div className="fa fa-search searchIcon"></div>
+                    </div>
             )
         }
     }
@@ -57,13 +57,13 @@
             const {activities} = this.props;
 
             return (
-                <div className="content">
-                    <div className="line"></div>
-                {/* Timeline item */}
-                {activities.map((activity) => (
-                    <ActivityItem activity={activity} />
-                ))}
-                </div>
+                    <div className="content">
+                        <div className="line"></div>
+                        {/* Timeline item */}
+                        {activities.map((activity) => (
+                                <ActivityItem activity={activity}/>
+                        ))}
+                    </div>
             )
         }
     }
@@ -72,21 +72,45 @@
         render() {
             const {activity} = this.props;
 
-             return (
-                 <div className="item">
-                    <div className="avatar">
-                        <img src={activity.user.avatar} />
-                        {activity.user.name}
-                    </div>
-                    
-                    <span className="time">
+            return (
+                    <div className="item">
+                        <div className="avatar">
+                            <img src={activity.user.avatar}/>
+                            {activity.user.name}
+                        </div>
+
+                        <span className="time">
                         {activity.timestamp}
                     </span>
-                    <p>{activity.text}</p>
-                    <div className="commentCount">
-                        {activity.comments.length}
+                        <p>{activity.text}</p>
+                        <div className="commentCount">
+                            {activity.comments.length}
+                        </div>
                     </div>
-                </div>
+            )
+        }
+    }
+
+    class Clock extends React.Component {
+        constructor(props) {
+            super(props);
+            this.state = this.getTime();
+        }
+
+        render() {
+            const {hours, minutes, seconds, ampm} = this.state;
+            return (
+                    <div className="clock">
+                        {
+                            hours === 0 ? 12 :
+                                (hours > 12) ?
+                                    hours - 12 : hours
+                        }:{
+                        minutes > 9 ? minutes : 0${minutes}
+                    }:{
+                        seconds > 9 ? seconds : 0${seconds}
+                    } {ampm}
+                    </div>
             )
         }
     }
@@ -96,24 +120,24 @@
             timestamp: new Date().getTime(),
             text: "Ate lunch",
             user: {
-            id: 1, name: 'Nate',
-            avatar: "http://www.croop.cl/UI/twitter/images/doug.jpg"
+                id: 1, name: 'Nate',
+                avatar: "http://www.croop.cl/UI/twitter/images/doug.jpg"
             },
-            comments: [{ from: 'Ari', text: 'Me too!' }]
+            comments: [{from: 'Ari', text: 'Me too!'}]
         },
         {
             timestamp: new Date().getTime(),
             text: "Woke up early for a beautiful run",
             user: {
-            id: 2, name: 'Ari',
-            avatar: "http://www.croop.cl/UI/twitter/images/doug.jpg"
+                id: 2, name: 'Ari',
+                avatar: "http://www.croop.cl/UI/twitter/images/doug.jpg"
             },
-            comments: [{ from: 'Nate', text: 'I am so jealous' }]
+            comments: [{from: 'Nate', text: 'I am so jealous'}]
         },
-    ]
+    ];
 
-    var mount = document.querySelector('#app');
-    ReactDOM.render(<App />, mount);
+    const mount = document.querySelector('#app');
+    ReactDOM.render(<App/>, mount);
 </script>
 
 </html>
