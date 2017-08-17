@@ -1,21 +1,51 @@
 import React from 'react';
 
-import ActivityItem from './ActivityItem';
+import ActivityItem from './components/Timeline/GithhubActivityItem';
+
+const data = require('./data/data.json').slice(0, 4);
 
 class Content extends React.Component {
-  render() {
-    const {activities} = this.props;
+    constructor(props) {
+        super(props);
 
-    return (
-      <div className="content">
-      <div className="line"></div>
+        this.state = {
+            loading: false,
+            activities: []
+        }
+    }
 
-      {activities.map((activity, index) => (
-        <ActivityItem activity={activity} key={index}/>
-      ))}
-      </div>
-    )
-  }
+    componentDidMount() {
+        this.updateData();
+    }
+
+
+    componentWillReceiveProps(nextProps) {
+        if (nextProps.requestRefresh !== this.props.requestRefresh) {
+            this.setState({loading: true}, this.updateData)
+        }
+    }
+
+    updateData() {
+        this.setState({
+            loading: false,
+            activities: data
+                .sort(() => 0.5 - Math.random()).slice(0, 4)
+        }, this.props.onComponentRefresh);
+    }
+
+    render() {
+        const {loading, activities} = this.state;
+
+        return (
+            <div className="content">
+                <div className="line"></div>
+                {loading && <div>Loading</div>}
+                {activities.map((activity) => (
+                    <ActivityItem activity={activity} key={activity.id}/>
+                ))}
+            </div>
+        )
+    }
 }
 
 export default Content;

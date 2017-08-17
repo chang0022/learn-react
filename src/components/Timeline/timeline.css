@@ -168,7 +168,7 @@
             -ms-border-radius: 50%;
             -o-border-radius: 50%;
             border-radius: 50%;
-            position: relative; 
+            position: relative;
           }
         }
 
@@ -201,9 +201,9 @@
 
           font-size: 12px;
           top: 11px;
-          
+
           &:after {
-            content: "\f075"; 
+            content: "\f075";
             font-family: FontAwesome;
             position: absolute;
             font-size: 20px;
