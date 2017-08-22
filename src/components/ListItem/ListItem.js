@@ -2,14 +2,15 @@ import React from 'react';
 
 class ListItem extends React.Component {
     render() {
+        const {item} = this.props;
         return (
             <li>
                 <div className="weui-flex">
-                    <p className="weui-flex__item">表单</p>
-                    <img src="./images/icon_nav_form.png" />
+                    <p className="weui-flex__item">{item.name}</p>
+                    <img src={item.icon} alt={item.name} />
                 </div>
             </li>
-        )
+        );
     }
 }
 

@@ -10,8 +10,8 @@ class List extends React.Component {
             <div className="page__bd">
                 <ul>
                     {lists.map((item,index) => (
-                        <ListItem item={item}/>
-                    ))};
+                        <ListItem item={item} key={index} />
+                    ))}
                 </ul>
             </div>
         );
