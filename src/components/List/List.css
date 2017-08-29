@@ -23,3 +23,6 @@
     width: 30px;
     height: 30px;
 }
+.page__bd .js_show .weui-flex {
+    opacity: .4;
+}

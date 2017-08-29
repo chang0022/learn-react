@@ -5,24 +5,23 @@ class ListItem extends React.Component {
         super(props);
 
         this.state = {
-            curr: ''
+            curr: '',
+            listVisible: false
         }
     }
 
-    shouldComponentUpdate(nextProps, nextState) {
-        return !(nextState.curr === this.state.curr)
-    }
-
-    handleClick(i) {
-        this.setState({curr: i})
+    showList() {
+        this.setState({
+            listVisible: !this.state.listVisible
+        })
     }
 
     render() {
-        const {item, index} = this.props;
+        const {item, index, selectTab} = this.props;
         return (
             <li
-                className={index === this.state.curr ? 'js-show' : ''}
-                onClick={this.handleClick.bind(this, index)}>
+                className={index === this.props.curr ? 'js-show' : ''}
+                onClick={() => selectTab(index)}>
                 <div className="weui-flex">
                     <p className="weui-flex__item">{item.name}</p>
                     <img src={item.icon} alt={item.name}/>
